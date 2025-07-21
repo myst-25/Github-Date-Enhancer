@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,  
+  "name": "GitHub Date Enhancer",
+  "version": "1.1",
+  "description": "Shows clean date format next to relative time on GitHub",
+  "permissions": ["tabs", "https://github.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "js": ["lib/browser-polyfill.min.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "48": "icons/icon48.png"
+  },
+  "browser_action": { 
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": ["popup.css"]
+}

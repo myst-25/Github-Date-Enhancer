@@ -1,0 +1,245 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+body {
+    background: #f6f8fa;
+    color: #24292e;
+    width: 380px;
+    height: 320px; /* Increased height for buttons */
+    overflow: hidden;
+    padding: 0;
+}
+
+.popup-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    background: #2d333b;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #444c56;
+}
+
+.logo {
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+
+.logo svg {
+    width: 18px;
+    height: 18px;
+    fill: #f0f6fc;
+}
+
+.title-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.title-container:hover {
+    /* Removed hover effect */
+}
+.app-name {
+    color: #f0f6fc;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.app-name:hover {
+    text-decoration: underline;
+    color: #0969da;
+}
+
+.app-description {
+    color: #b1bac4;
+    font-size: 12px;
+    margin: 2px 0 0 0;
+    font-weight: 400;
+}
+
+.app-version {
+    color: #768390;
+    font-size: 11px;
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+.app-version:hover {
+    text-decoration: underline;
+    color: #0969da;
+}
+
+.content {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+.status-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.status-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.status-icon.working {
+    background: #e6f7e6;
+    border: 2px solid #2da44e;
+}
+
+.status-icon.not-working {
+    background: #fef0f0;
+    border: 2px solid #cb2431;
+}
+
+.status-icon svg {
+    width: 14px;
+    height: 14px;
+}
+
+.status-icon.working svg {
+    fill: #2da44e;
+}
+
+.status-icon.not-working svg {
+    fill: #cb2431;
+}
+
+.status-text {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.status-text.working {
+    color: #2da44e;
+}
+
+.status-text.not-working {
+    color: #cb2431;
+}
+
+.example {
+    background: #f8fafc;
+    border-radius: 6px;
+    border: 1px solid #d0d7de;
+    padding: 10px;
+    margin-bottom: 16px;
+}
+
+.example-title {
+    font-size: 11px;
+    color: #57606a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.date-example {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+}
+
+.absolute-date {
+    font-weight: 500;
+    color: #24292f;
+}
+
+.relative-time {
+    color: #57606a;
+    margin-left: 6px;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 0;
+    align-items: stretch;
+}
+
+.source-button, .github-button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #e1e4e8;
+    transition: all 0.2s;
+    text-align: center;
+}
+
+.source-button {
+    background: #f6f8fa;
+    color: #24292f;
+}
+
+.source-button:hover {
+    background: #eaeef2;
+}
+
+.github-button {
+    background: #2d333b;
+    color: #f0f6fc;
+}
+
+.github-button:hover {
+    background: #444c56;
+}
+
+.source-button svg, .github-button svg {
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
+}
+
+.source-button svg {
+    fill: #24292f;
+}
+
+.github-button svg {
+    fill: #f0f6fc;
+}
+
+.footer {
+    padding: 10px 16px;
+    background: #f6f8fa;
+    border-top: 1px solid #e1e4e8;
+    text-align: center;
+    font-size: 11px;
+    color: #57606a;
+}
