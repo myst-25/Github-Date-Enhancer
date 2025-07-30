@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "GitHub Date Enhancer",
-  "version": "1.1",
-  "description": "Shows clean date format next to relative time on GitHub",
+  "name": "GitHub Enhancer",
+  "version": "1.2",
+  "description": "Github Pro",
   "permissions": ["tabs"],
   "host_permissions": ["https://github.com/*"],
   "content_scripts": [

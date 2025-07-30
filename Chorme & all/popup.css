@@ -9,7 +9,7 @@ body {
     background: #f6f8fa;
     color: #24292e;
     width: 380px;
-    height: 320px; /* Increased height for buttons */
+    height: 100px; /* Increased height for buttons */
     overflow: hidden;
     padding: 0;
 }
@@ -53,9 +53,6 @@ body {
     gap: 2px;
 }
 
-.title-container:hover {
-    /* Removed hover effect */
-}
 .app-name {
     color: #f0f6fc;
     font-size: 20px;
@@ -85,6 +82,11 @@ body {
 .app-version:hover {
     text-decoration: underline;
     color: #0969da;
+}
+
+/* Version number added */
+.app-version::after {
+    content: " v1.2";
 }
 
 .content {
@@ -182,14 +184,15 @@ body {
 
 .buttons-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Align buttons horizontally */
     gap: 10px;
     margin-top: 0;
-    align-items: stretch;
+    justify-content: center; /* Center the buttons */
 }
 
 .source-button, .github-button {
-    flex: 1;
+    flex: none; /* Prevent buttons from stretching */
+    width: auto; /* Allow buttons to size based on content */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -242,4 +245,16 @@ body {
     text-align: center;
     font-size: 11px;
     color: #57606a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer .buttons-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
 }

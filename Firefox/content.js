@@ -1,117 +1,51 @@
-
 // content.js
+function formatDate(dateString) {
+  // Returns "27, June 2025"
+  const date = new Date(dateString);
+  // e.g., new Date('2025-06-27T12:00:00Z')
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = date.toLocaleString('en-US', { month: 'long' }); // "June"
+  const year = date.getFullYear();
+  return `${day}, ${month} ${year}`;
+}
+
 function enhanceDates() {
-  document.querySelectorAll('relative-time').forEach(el => {
-    // Skip if already enhanced
-    if (el.parentElement.classList.contains('gh-date-enhanced')) return;
-    
-    // Get ISO date string from datetime attribute
+  document.querySelectorAll('relative-time:not(.gh-date-enhanced)').forEach(el => {
     const isoDate = el.getAttribute('datetime');
     if (!isoDate) return;
-    
-    // Format date to "Month DD, YYYY"
-    const formattedDate = formatDate(isoDate);
-    
-    // Create container for both date elements
-    const container = document.createElement('span');
-    container.className = 'gh-date-enhanced';
-    
-    // Create absolute date element
-    const absoluteEl = document.createElement('span');
-    absoluteEl.className = 'gh-absolute-date';
-    absoluteEl.textContent = formattedDate;
-    
-    // Clone the relative time element
-    const relativeClone = el.cloneNode(true);
-    relativeClone.classList.add('gh-relative-time');
-    
-    // Add elements to container
-    container.appendChild(absoluteEl);
-    container.appendChild(relativeClone);
-    
-    // Replace original element with new container
-    el.parentNode.replaceChild(container, el);
+    const formatted = formatDate(isoDate);
+
+    // Replace the element with a span with your styling (optional)
+    const span = document.createElement('span');
+    span.className = 'gh-date-enhanced';
+    span.textContent = formatted;
+
+    el.parentNode.replaceChild(span, el);
   });
-  
-  // Inject minimal styles if needed
+
+  // Optional: add style once if you want dates colored/bold
   if (!document.getElementById('gh-date-styles')) {
     const style = document.createElement('style');
     style.id = 'gh-date-styles';
     style.textContent = `
-      /* Container styling */
       .gh-date-enhanced {
-        display: inline;
-        margin-left: 6px;
-      }
-      
-      /* Absolute date styling */
-      .gh-absolute-date {
-        display: inline;
         font-weight: 500;
-        color: var(--color-fg-default);
+        color: var(--color-fg-default, #ffffffff);
+        white-space: nowrap;
+        margin-left: 6px;
+        line-height: 1.2;
       }
-      
-      /* Relative time styling */
-      .gh-relative-time {
-        display: inline;
-        color: var(--color-fg-muted);
-        font-style: normal;
-        margin-left: 4px;
-      }
-      
-      /* GitHub theme compatibility */
-      [data-color-mode="light"][data-light-theme*="light"] .gh-absolute-date {
-        color: #24292f;
-      }
-      
-      [data-color-mode="light"][data-light-theme*="light"] .gh-relative-time {
-        color: #57606a;
-      }
-      
-      [data-color-mode="dark"][data-dark-theme*="dark"] .gh-absolute-date {
+      [data-color-mode="dark"][data-dark-theme*="dark"] .gh-date-enhanced {
         color: #e6edf3;
-      }
-      
-      [data-color-mode="dark"][data-dark-theme*="dark"] .gh-relative-time {
-        color: #7d8590;
       }
     `;
     document.head.appendChild(style);
   }
 }
 
-// Format date without time or timezone
-function formatDate(dateString) {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric'
-  });
-}
-
-// Initial enhancement
+// Initial run
 enhanceDates();
 
-// Observer for dynamic content
-const observer = new MutationObserver(() => {
-  enhanceDates();
-});
-
-observer.observe(document.body, {
-  childList: true,
-  subtree: true
-});
-
-// Handle GitHub's PJAX navigation
-document.addEventListener('pjax:end', enhanceDates);
-
-// Listen for messages from popup.js
-browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.type === 'GET_GH_DATES') {
-    // Collect all absolute dates currently shown
-    const dates = Array.from(document.querySelectorAll('.gh-absolute-date')).map(el => el.textContent);
-    sendResponse({ dates });
-    return true; // Indicates async response
-  }
-});
+// Enhance instantly as new elements load dynamically
+const observer = new MutationObserver(() => enhanceDates());
+observer.observe(document.body, { childList: true, subtree: true });
